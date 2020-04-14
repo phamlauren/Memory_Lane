@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<style>
+		.title{
+			font-size: 24px;
+			text-align: center;
+			padding: 10px;
+			margin: 10px;
+		}
+
+		.input-item{
+			text-align: center;
+		}
+
+		.input-item{
+			margin: 10px;
+		}
+
+		.warning{
+			color: red;
+			padding: 10px;
+		}
+
+		.hidden{
+			display: none;
+		}
+
+	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384- GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  	 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+	{% extends "navbar.html" %}
+	{% block content %}
+	<div class="title">Create a new track</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="title" placeholder="Title"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="title-warning">Title must not be blank</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="artist1" placeholder="Artist 1"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="artist1-warning">You must specify at least 1 artist</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="artist2" placeholder="Artist 2"></input></div>
+			</div>
+			<div class="col-md-3 warning"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="artist3" placeholder="Artist 3"></input></div>
+			</div>
+			<div class="col-md-3 warning"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="album" placeholder="Album"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="album-warning">Album must not be empty</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="year_released" placeholder="Year Released"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="year_released-warning">Year released must not be blank</div>
+				<div class="hidden" id="year_released-number-warning">Year released must be a number</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><textarea id="description" placeholder="Memory"></textarea></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="description-warning">Memory must not be blank</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="category" placeholder="Playlist category"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="category-warning">Category must not be blank</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-6">
+				<div class="input-item"><input type="text" id="media_link" placeholder="Image link"></input></div>
+			</div>
+			<div class="col-md-3 warning">
+				<div class="hidden" id="media_link-warning">Image link must not be blank</div>
+				<div class="hidden" id="media_link-invalid-warning">Image resource not found at entered link</div>
+			</div>
+		</div>
+	</div>
+	<div class="input-item"><button type="submit" class="btn btn-primary" id="save_track">Save track</button></div>
+	{% endblock %}
+</body>
+
+</html>
