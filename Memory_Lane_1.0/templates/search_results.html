@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<style>
+		.title{
+			font-size: 24px;
+			text-align: center;
+			padding: 50px;
+			margin: 10px;
+		}
+
+		img{
+			width: 20%;
+		}
+
+		.row{
+			margin-bottom: 20px;
+		}
+
+		.card{
+			height: 100%;
+		}
+
+		.category{
+			font-style: italic;
+		}
+
+		.card-title, .card-text{
+			margin: 3px;
+		}
+
+		mark{
+			background-color: yellow;
+		}
+
+	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384- GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  	 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script>
+    	var matching_tracks = {{ matching_tracks|tojson }}
+    </script>
+
+</head>
+
+<body>
+	{% extends "navbar.html" %}
+	{% block content %}
+	<div class="title">
+		{% if search_string == "All" %}
+		Displaying all entries
+		{% else %}
+		Search results for "{{ search_string }}"
+		{% endif %}
+		<p>Showing {{ number_results }} {% if 1 == number_results|int %}result{% else %}results{% endif %}</p>
+	</div>
+
+	<div class="container">
+		{% for tracks in matching_tracks|batch(3) %}
+			<div class="row">
+				{% for track in tracks %}
+				<div class="col-md-4">
+					<div class="card">
+					  	<a href="http://127.0.0.1:5000/view/{{ track.id }}"><img class="card-img-top" src="{{ track.media_link }}" alt="Album artwork for {{ track.title }} by {{ track.artist }}"></a>
+					  	<div class="card-body">
+					    	<h5 class="card-title">{{ track.title }}</h5>
+					    	<p class="card-text">
+					    	{% set first = [] %}
+							{% for artist in track.artist -%}
+								{% if not artist.mark_as_deleted -%}
+									{% if not first -%}
+										{% if first.append(true) %}{% endif %}{{ artist.name }}{% else %}, {{ artist.name }}
+									{%- endif %}
+								{%- endif %}
+							{%- endfor %}
+					    	</p>
+					    	<p class="card-text category">{{ track.category }}</p>
+				  		</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	{% endblock %}
+</body>
+
+</html>

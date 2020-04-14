@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<style>
+
+		body{
+			text-align: center;
+		}
+
+		div{
+			text-align: center;
+		}
+
+		img{
+			width: 20%;
+		}
+
+		.row{
+			margin: 10px 0 10px 0;
+		}
+
+		.track{
+			margin: 20px;
+			padding: 10px;
+		}
+
+		#track_id{
+			display: none;
+		}
+
+		span{
+			padding: 0;
+			margin: 0;
+		}
+
+		#title-row{
+			font-size: 30px;
+		}
+
+		#album-name{
+			font-style: italic;
+		}
+
+		#category-row{
+			font-size: 20px;
+			text-align: center;
+		}
+
+		#description-row{
+			text-align: center;
+		}
+
+		textarea{
+			width: 100%;
+			height: 100%;
+		}
+
+	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384- GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  	 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+	{% extends "navbar.html" %}
+	{% block content %}
+	<div class="track">
+		<div><img src="{{ track.media_link }}" alt="Album artwork for {{ track.title }} by {{ track.artist }}"></div>
+		<div class="container">
+			<div class="row" id="title-row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">{{ track.title }}</div>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					{% set first = [] %}
+					{% for artist in track.artist -%}
+						{% if not artist.mark_as_deleted -%}
+							{% if not first -%}
+								{% if first.append(true) %}{% endif %}<span id="artist{{loop.index}}"><a id="remove_artist{{ loop.index }}" href="#">{{ artist.name }}</a></span>{% else %}<span id="artist{{loop.index}}">, <a id="remove_artist{{ loop.index }}" href="#">{{ artist.name }}</a></span>
+							{%- endif %}
+						{%- endif %}
+					{%- endfor %}</div>
+				<div class="col-md-3" id="undo_artist">Click artist to remove</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6"><span id="album-name">{{ track.album }}</span>, {{ track.year_released }}</div>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="row" id="description-row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6" id="description_box">{{ track.description }}</div>
+				<div class="col-md-3" id="description_button"><button type="submit" class="btn btn-primary" id="edit_description">Edit</button></div>
+			</div>
+			<div class="row" id="category-row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6" id="category_box" value="{{ track.category }}">{{ track.category|upper }}</div>
+				<div class="col-md-3" id="category_button"><button type="submit" class="btn btn-primary" id="edit_category">Edit</button></div>
+			</div>
+	</div>
+	<div id="track_id">{{ track.id }}</div>
+	{% endblock %}
+</body>
+
+</html>
