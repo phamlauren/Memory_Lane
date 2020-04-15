@@ -1,3 +1,4 @@
 To active virtual env: source venv/bin/activate
 To deactivate: deactivate
 Packages installed in venv: flask, curl
+Setup ssh
