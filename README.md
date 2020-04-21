@@ -15,5 +15,5 @@ I built the first version of this Flask app with particular focus on building pr
 
 Having built the app's UI already, I have decided to use Memory Lane to learn how to build and consume a RESTful API. In addition to building my own API which holds the memory text entered by the user, my second goal is to consume Spotify's API to access my own Spotify playlist information, so that I don't have to manually enter that information along with the memory information.
 
-[//]: ### Memory Lane 2.0 is also the project which will initialize my first day in my [100 Days of Code goal, inspired by Jackie Luo](https://medium.com/@jackiehluo/a-year-of-code-c7bc1d4460cb).
+<!--# Memory Lane 2.0 is also the project which will initialize my first day in my [100 Days of Code goal, inspired by Jackie Luo](https://medium.com/@jackiehluo/a-year-of-code-c7bc1d4460cb).-->
 
